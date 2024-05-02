@@ -38,6 +38,7 @@
 .embla__button {
   -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
   -webkit-appearance: none;
+  top: 50%; /* Center vertically */
   pointer-events: auto;
   position: absolute;
   transform: translateY(-50%);
@@ -62,18 +63,15 @@
 }
 
 .embla__button--prev {
-  left: 0;
-  margin-top: 150px;
+  left: -80px;
 }
 
 .embla__button--next {
-  right: 0;
-  top: 0;
-  margin-top: 160px;
+  right: -80px;
 }
 
 .embla__button:disabled {
-  color: var(--detail-high-contrast);
+  display: none;
 }
 
 .embla__button__svg {
