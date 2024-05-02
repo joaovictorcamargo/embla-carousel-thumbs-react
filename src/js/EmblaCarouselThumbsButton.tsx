@@ -4,7 +4,7 @@ type PropType = {
   selected: boolean
   index: number
   onClick: () => void
-  imageUrl: string // URL of the image for the thumbnail
+  imageUrl: string
 }
 
 export const Thumb: React.FC<PropType> = ({
