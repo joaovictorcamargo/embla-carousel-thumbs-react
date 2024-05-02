@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import EmblaCarousel from './EmblaCarousel'
+import EmblaCarousel from './js/EmblaCarousel'
 import { EmblaOptionsType } from 'embla-carousel'
-import '../css/base.css'
-import '../css/sandbox.css'
-import '../css/embla.css'
+import './css/base.css'
+import './css/sandbox.css'
+import './css/embla.css'
 
 const OPTIONS: EmblaOptionsType = {}
 const SLIDE_COUNT = 8
