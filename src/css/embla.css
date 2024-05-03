@@ -84,9 +84,7 @@
   --thumbs-slide-height: 6rem;
   margin-top: var(--thumbs-slide-spacing);
 }
-.embla-thumbs__viewport {
-  overflow: hidden;
-}
+
 .embla-thumbs__container {
   display: flex;
   flex-direction: row;
@@ -94,9 +92,14 @@
 }
 
 .embla-thumbs__slide {
-  flex: 0 0 22%;
-  min-width: 0;
-  padding-left: var(--thumbs-slide-spacing);
+  display: flex;
+  width: 60px;
+  height: 60px;
+  padding: 2px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 @media (min-width: 576px) {
