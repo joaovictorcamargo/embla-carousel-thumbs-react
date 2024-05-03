@@ -60,19 +60,25 @@ const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
 
   return (
     <section className="embla">
-      <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+      <PrevButton
+        onClick={onPrevButtonClick}
+        disabled={prevBtnDisabled}
+        tabIndex={selectedIndex === 0 ? -1 : 1}
+      />
       <div className="embla__viewport" ref={emblaMainRef}>
         <div className="embla__container">
           {slides.map((index) => (
-            <div
-              className="embla__slide"
-              key={index}
-              style={{ backgroundImage: `url(${imageUrls[index]})` }}
-            />
+            <div className="embla__slide" key={index}>
+              <img
+                src={imageUrls[index]}
+                alt={`Slide ${index}`}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </div>
           ))}
         </div>
       </div>
-      <div className="embla-thumbs">
+      <div className="embla-thumbs" role="tablist" aria-label="Slides">
         <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
           <div className="embla-thumbs__container">
             {slides.map((index) => (
@@ -80,14 +86,17 @@ const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
                 key={index}
                 onClick={() => onThumbClick(index)}
                 selected={index === selectedIndex}
-                index={index}
                 imageUrl={imageUrls[index]}
               />
             ))}
           </div>
         </div>
       </div>
-      <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+      <NextButton
+        onClick={onNextButtonClick}
+        disabled={nextBtnDisabled}
+        tabIndex={selectedIndex === 0 ? 1 : 2}
+      />
     </section>
   )
 }

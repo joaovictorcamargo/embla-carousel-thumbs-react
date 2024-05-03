@@ -2,17 +2,11 @@ import React from 'react'
 
 type PropType = {
   selected: boolean
-  index: number
   onClick: () => void
   imageUrl: string
 }
 
-export const Thumb: React.FC<PropType> = ({
-  selected,
-  index,
-  onClick,
-  imageUrl
-}) => {
+export const Thumb: React.FC<PropType> = ({ selected, onClick, imageUrl }) => {
   return (
     <div
       className={'embla-thumbs__slide'.concat(
@@ -28,6 +22,7 @@ export const Thumb: React.FC<PropType> = ({
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
+        tabIndex={3}
       />
     </div>
   )

@@ -60,13 +60,14 @@ type PropType = PropsWithChildren<
 >
 
 export const PrevButton: React.FC<PropType> = (props) => {
-  const { children, ...restProps } = props
+  const { children, tabIndex, ...restProps } = props
 
   return (
     <button
       className="embla__button embla__button--prev"
       type="button"
       {...restProps}
+      tabIndex={tabIndex}
     >
       <svg className="embla__button__svg" viewBox="0 0 532 532">
         <path
@@ -80,13 +81,14 @@ export const PrevButton: React.FC<PropType> = (props) => {
 }
 
 export const NextButton: React.FC<PropType> = (props) => {
-  const { children, ...restProps } = props
+  const { children, tabIndex, ...restProps } = props
 
   return (
     <button
       className="embla__button embla__button--next"
       type="button"
       {...restProps}
+      tabIndex={tabIndex}
     >
       <svg className="embla__button__svg" viewBox="0 0 532 532">
         <path
