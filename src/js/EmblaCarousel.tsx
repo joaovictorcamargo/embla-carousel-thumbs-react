@@ -7,16 +7,20 @@ import {
   NextButton,
   usePrevNextButtons
 } from './EmblaCarouselArrowButtons'
-import img1 from '../images/Property1.png'
-import img2 from '../images/collage.png'
-import img3 from '../images/collage2.png'
 
 type PropType = {
   slides: number[]
+  mainSlideImages: string[] 
+  thumbImages: string[]
   options?: EmblaOptionsType
 }
 
-const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
+const EmblaCarousel: React.FC<PropType> = ({
+  slides,
+  mainSlideImages,
+  thumbImages,
+  options
+}) => {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [backgroundColor, setBackgroundColor] = useState('red')
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options)
@@ -32,8 +36,6 @@ const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
     onPrevButtonClick,
     onNextButtonClick
   } = usePrevNextButtons(emblaMainApi, slides.length)
-
-  const imageUrls = [img1, img3, img2, img1, img1, img1, img1, img1]
 
   const onThumbClick = useCallback(
     (index: number) => {
@@ -66,7 +68,7 @@ const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
     if (context !== null) {
       const image = new Image()
       image.crossOrigin = 'Anonymous'
-      image.src = imageUrls[selectedIndex]
+      image.src = mainSlideImages[selectedIndex]
       image.onload = () => {
         canvas.width = image.width
         canvas.height = image.height
@@ -82,7 +84,7 @@ const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
     } else {
       console.error('Canvas context is null')
     }
-  }, [selectedIndex, imageUrls])
+  }, [selectedIndex, mainSlideImages])
 
   return (
     <div
@@ -104,7 +106,7 @@ const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
             {slides.map((index) => (
               <div className="embla__slide" key={index}>
                 <img
-                  src={imageUrls[index]}
+                  src={mainSlideImages[index]} 
                   alt={`Slide ${index}`}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
@@ -120,7 +122,7 @@ const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
                   key={index}
                   onClick={() => onThumbClick(index)}
                   selected={index === selectedIndex}
-                  imageUrl={imageUrls[index]}
+                  imageUrl={thumbImages[index]}
                 />
               ))}
             </div>
