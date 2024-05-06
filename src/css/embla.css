@@ -38,7 +38,7 @@
 .embla__button {
   -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
   -webkit-appearance: none;
-  top: 50%; /* Center vertically */
+  top: 50%;
   pointer-events: auto;
   position: absolute;
   transform: translateY(-50%);
@@ -63,11 +63,9 @@
 }
 
 .embla__button--prev {
-  left: -80px;
 }
 
 .embla__button--next {
-  right: -80px;
 }
 
 .embla__button:disabled {
@@ -80,7 +78,7 @@
 }
 
 .embla-thumbs {
-  --thumbs-slide-spacing: 0.8rem;
+  --thumbs-slide-spacing: 14px;
   --thumbs-slide-height: 6rem;
   margin-top: var(--thumbs-slide-spacing);
 }

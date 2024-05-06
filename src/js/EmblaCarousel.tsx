@@ -85,13 +85,20 @@ const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
   }, [selectedIndex, imageUrls])
 
   return (
-    <div style={{ backgroundColor }}>
+    <div
+      style={{
+        backgroundColor,
+        paddingTop: '100px',
+        paddingBottom: '30px',
+        paddingInline: '30px'
+      }}
+    >
+      <PrevButton
+        onClick={onPrevButtonClick}
+        disabled={prevBtnDisabled}
+        tabIndex={selectedIndex === 0 ? -1 : 1}
+      />
       <section className="embla">
-        <PrevButton
-          onClick={onPrevButtonClick}
-          disabled={prevBtnDisabled}
-          tabIndex={selectedIndex === 0 ? -1 : 1}
-        />
         <div className="embla__viewport" ref={emblaMainRef}>
           <div className="embla__container">
             {slides.map((index) => (
@@ -119,12 +126,21 @@ const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
             </div>
           </div>
         </div>
+      </section>
+      <div
+        style={{
+          position: 'absolute',
+          top: '50%',
+          right: '0'
+        }}
+      >
         <NextButton
           onClick={onNextButtonClick}
           disabled={nextBtnDisabled}
           tabIndex={selectedIndex === 0 ? 1 : 2}
+          style={{ marginLeft: '-74px' }}
         />
-      </section>
+      </div>
     </div>
   )
 }
