@@ -20,7 +20,7 @@ const SLIDE_COUNT = 8
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
 const mainSlideImages = [img1, img3, img2, img1, img1, img1, img1, img1]
-const thumbImages = [img4, img5, img6, img7, img8, img9, img9, img9, img9]
+const thumbImages = [img4, img8, img5, img6, img7, img9, img9, img9, img9]
 
 const App: React.FC = () => (
   <>
