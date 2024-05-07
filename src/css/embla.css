@@ -1,7 +1,6 @@
 .embla {
   max-width: 48rem;
   margin: auto;
-  position: relative;
   --slide-height: 50rem;
   --slide-spacing: 1rem;
   --slide-size: 100%;
@@ -12,7 +11,6 @@
 }
 
 .embla__container {
-  backface-visibility: hidden;
   display: flex;
   touch-action: pan-y;
   margin-left: calc(var(--slide-spacing) * -1);
@@ -20,11 +18,7 @@
 
 .embla__slide {
   flex: 0 0 var(--slide-size);
-  background-size: cover;
-  background-position: center;
-  min-width: 0;
   padding-left: var(--slide-spacing);
-  height: var(--slide-height);
 }
 
 .embla__controls {

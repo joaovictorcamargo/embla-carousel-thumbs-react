@@ -10,7 +10,7 @@ import {
 
 type PropType = {
   slides: number[]
-  mainSlideImages: string[] 
+  mainSlideImages: string[]
   thumbImages: string[]
   options?: EmblaOptionsType
 }
@@ -106,7 +106,7 @@ const EmblaCarousel: React.FC<PropType> = ({
             {slides.map((index) => (
               <div className="embla__slide" key={index}>
                 <img
-                  src={mainSlideImages[index]} 
+                  src={mainSlideImages[index]}
                   alt={`Slide ${index}`}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
