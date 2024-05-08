@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { EmblaOptionsType } from 'embla-carousel'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { Thumb } from './EmblaCarouselThumbsButton'
 import {
@@ -7,6 +6,7 @@ import {
   NextButton,
   usePrevNextButtons
 } from './EmblaCarouselArrowButtons'
+import type { EmblaOptionsType } from 'embla-carousel'
 
 type PropType = {
   slides: number[]
@@ -21,9 +21,9 @@ const EmblaCarousel: React.FC<PropType> = ({
   thumbImages,
   options
 }) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel(options)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [backgroundColor, setBackgroundColor] = useState('red')
-  const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options)
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
     containScroll: 'keepSnaps',
     dragFree: true,
@@ -35,31 +35,31 @@ const EmblaCarousel: React.FC<PropType> = ({
     nextBtnDisabled,
     onPrevButtonClick,
     onNextButtonClick
-  } = usePrevNextButtons(emblaMainApi, slides.length)
+  } = usePrevNextButtons(emblaApi, slides.length)
 
   const onThumbClick = useCallback(
     (index: number) => {
-      if (!emblaMainApi || !emblaThumbsApi) return
-      emblaMainApi.scrollTo(index)
+      if (!emblaApi || !emblaThumbsApi) return
+      emblaApi.scrollTo(index)
       setSelectedIndex(index)
     },
-    [emblaMainApi, emblaThumbsApi]
+    [emblaApi, emblaThumbsApi]
   )
 
   const onSelect = useCallback(() => {
-    if (!emblaMainApi || !emblaThumbsApi) return
-    const selected = emblaMainApi.selectedScrollSnap()
+    if (!emblaApi || !emblaThumbsApi) return
+    const selected = emblaApi.selectedScrollSnap()
     setSelectedIndex(selected)
     emblaThumbsApi.scrollTo(Math.max(0, selected - 1))
-  }, [emblaMainApi, emblaThumbsApi])
+  }, [emblaApi, emblaThumbsApi])
 
   useEffect(() => {
-    if (emblaMainApi && emblaThumbsApi) {
+    if (emblaApi && emblaThumbsApi) {
       onSelect()
-      emblaMainApi.on('select', onSelect)
-      emblaMainApi.on('reInit', onSelect)
+      emblaApi.on('select', onSelect)
+      emblaApi.on('reInit', onSelect)
     }
-  }, [emblaMainApi, emblaThumbsApi, onSelect])
+  }, [emblaApi, emblaThumbsApi, onSelect])
 
   useEffect(() => {
     const canvas = document.createElement('canvas')
@@ -101,7 +101,7 @@ const EmblaCarousel: React.FC<PropType> = ({
         tabIndex={selectedIndex === 0 ? -1 : 1}
       />
       <section className="embla">
-        <div className="embla__viewport" ref={emblaMainRef}>
+        <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
             {slides.map((index) => (
               <div className="embla__slide" key={index}>
@@ -123,6 +123,7 @@ const EmblaCarousel: React.FC<PropType> = ({
                   onClick={() => onThumbClick(index)}
                   selected={index === selectedIndex}
                   imageUrl={thumbImages[index]}
+                  emblaApi={emblaThumbsApi}
                 />
               ))}
             </div>
